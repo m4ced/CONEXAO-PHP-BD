@@ -2,7 +2,13 @@
 
 include('inc/conexao.php');
 
-$sql_alunos = "SELECT * FROM ALUNOS";
+$sql_alunos = "SELECT DISTINCT
+    ds_matricula,
+    nm_aluno,
+    ds_email
+FROM ALUNOS
+ORDER BY ds_matricula";
+
 $resultado_alunos = $conexao->query($sql_alunos);
 
 $sql_professores = "SELECT 
