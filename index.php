@@ -5,7 +5,15 @@ include('inc/conexao.php');
 $sql_alunos = "SELECT * FROM ALUNOS";
 $resultado_alunos = $conexao->query($sql_alunos);
 
-$sql_professores = "SELECT * FROM PROFESSORES";
+$sql_professores = "SELECT 
+    MIN(cd_professor) AS cd_professor,
+    nm_professor,
+    MIN(ds_rm_professor) AS ds_rm_professor,
+    MIN(ds_email_professor) AS ds_email_professor
+FROM PROFESSORES
+GROUP BY nm_professor
+ORDER BY MIN(cd_professor)";
+
 $resultado_professores = $conexao->query($sql_professores);
 
 $sql_materias = "SELECT 
@@ -15,6 +23,7 @@ $sql_materias = "SELECT
 FROM MATERIAS
 GROUP BY nm_materia
 ORDER BY MIN(cd_materia)";
+
 $resultado_materias = $conexao->query($sql_materias);
 
 $sql_mp = "SELECT 
